@@ -21,14 +21,6 @@
   <!-- Code syntax highlighting -->
   <link rel="stylesheet" href="lib/css/zenburn.css">
 
-  <!-- Printing and PDF exports -->
-  <script>
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.type = 'text/css';
-    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
-    document.getElementsByTagName('head')[0].appendChild(link);
-  </script>
 
   <!--[if lt IE 9]>
   <script src="lib/js/html5shiv.js"></script>
@@ -68,20 +60,18 @@
       <h4>Tout dans le html ..!</h4>
 
       <pre><code class="html" data-trim>
-<link rel="stylesheet" href="css/bootstrap.min.css"/>
-<link rel="stylesheet" href="css/jquery-ui.min.css"/>
-<link rel="stylesheet" href="css/jquery-ui.structure.min.css"/>
-<link rel="stylesheet" href="css/jquery-ui.theme.min.css"/>
-<link rel="stylesheet" href="css/font-awesome.min.css"/>
-<link rel="stylesheet" href="css/app.css"/>
-<script charset="utf-8" src="js/d3.min.js"></script>
-<script charset="utf-8" src="js/jquery-2.1.1.js"></script>
-<script charset="utf-8" src="js/jquery-ui.min.js"></script>
-<script charset="utf-8" src="js/bootstrap.min.js"></script>
-<script charset="utf-8" src="js/app.js"></script>
+&lt;link rel="stylesheet" href="css/bootstrap.min.css"/&gt;
+&lt;link rel="stylesheet" href="css/jquery-ui.min.css"/&gt;
+&lt;link rel="stylesheet" href="css/jquery-ui.structure.min.css"/&gt;
+&lt;link rel="stylesheet" href="css/jquery-ui.theme.min.css"/&gt;
+&lt;link rel="stylesheet" href="css/font-awesome.min.css"/&gt;
+&lt;link rel="stylesheet" href="css/app.css"/&gt;
+&lt;script charset="utf-8" src="js/d3.min.js"&gt;&lt;/script&gt;
+&lt;script charset="utf-8" src="js/jquery-2.1.1.js"&gt;&lt;/script&gt;
+&lt;script charset="utf-8" src="js/jquery-ui.min.js"&gt;&lt;/script&gt;
+&lt;script charset="utf-8" src="js/bootstrap.min.js"&gt;&lt;/script&gt;
+&lt;script charset="utf-8" src="js/app.js"&gt;&lt;/script&gt;
         </code></pre>
-
-      <img src="/img/nogodpleaseno.gif" style="height: 200px; margin-right: 30px">
 
       <small>
         <ul>
@@ -148,7 +138,7 @@ gulp.task('bundle:js', function() {
     .pipe(gulp.dest('dist'));
 });</code></pre>
 
-      <img class="fragment centered" src="/img/nogodpleaseno.gif" style="height: 200px; margin-right: 30px">
+      <img class="fragment centered" src="img/nogodpleaseno.gif" style="height: 200px; margin-right: 30px">
 
     </section>
 
@@ -157,7 +147,7 @@ gulp.task('bundle:js', function() {
 
       <div class="fragment">
 
-        <img src="/img/webpackdependencies.png" style="height: 410px; background-color:lightgray">
+        <img src="img/webpackdependencies.png" style="height: 410px; background-color:lightgray">
 
         <blockquote style="width: 100%">
           &ldquo;Webpack takes modules with dependencies and generates static assets representing those modules.&rdquo;
@@ -477,9 +467,9 @@ gulp.task('bundle:js', function() {
 
       <p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an
         example:</p>
-      <iframe src="https://www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0"
-              marginwidth="0" marginheight="0" scrolling="no"
-              style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen></iframe>
+      <!--<iframe src="https://www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0"-->
+              <!--marginwidth="0" marginheight="0" scrolling="no"-->
+              <!--style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen></iframe>-->
     </section>
 
     <section>
