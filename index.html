@@ -53,11 +53,47 @@
     </section>
 
     <section>
-      <h1>Avant Webpack, c'était comment ?</h1>
+      <h1>Avant Webpack, c’était comment ?</h1>
     </section>
 
     <section>
-      <h4>Tout dans le html ..!</h4>
+      <h4>Au temps des dynosaures...qu’est ce qu’était un module js ?</h4>
+
+      <div style="text-align: left">
+        <ul>
+          <li class="fragment medium">
+            D’abord de simples fonctions sont déclarées et deviennent accessibles sur window
+            <pre><code class="js" data-trim>
+function validateForm() {
+  //
+}
+            </code></pre>
+          </li>
+
+          <li class="fragment medium">
+            Puis on utilise des Immediately-Invoked Function Expression (IIFE)
+            <pre><code class="js" data-trim>
+(function validateForm() {
+  //
+})()
+            </code></pre>
+          </li>
+          <li class="fragment medium">
+            Cela permet l’enregistrement des modules dans un name space
+            <pre><code class="js" data-trim>
+var APP = APP || {};
+(function validateForm(APP) {
+  APP.validateForm() { // };
+})(APP)
+            </code></pre>
+          </li>
+        </ul>
+      </div>
+
+    </section>
+
+    <section>
+      <h4>Pour gérer les modules, on déclare<br> tout dans le html ..!</h4>
 
       <pre><code class="html" data-trim>
 &lt;link rel="stylesheet" href="css/bootstrap.min.css"/&gt;
