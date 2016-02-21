@@ -111,14 +111,23 @@ var APP = APP || {};
 
       <small>
         <ul>
-          <li class="fragment">Pas de concaténation</li>
-          <li class="fragment">Pas de minification</li>
-          <li class="fragment">Gestion des dépendances faite dans le html</li>
+          <li class="fragment">Mis dans &lt;head&gt;, l’utilisateur doit attendre le chargement de tous les scripts.</li>
+          <li class="fragment">Un peu mieux, en fin de &lt;body&gt;, les scripts se chargent en même temps que le dom s’exécute.</li>
         </ul>
-        <p class="fragment">
-          <strong>Don't do this !</strong>
-        </p>
       </small>
+      <div style="text-align: left">
+        <small>
+          <span class="fragment" style="display: inline-block; margin-left: 40px; margin-top: 20px;">
+            <strong>Don’t do this!</strong><br>
+            <img src="img/nogodpleaseno.gif" style="height: 200px;">
+          </span>
+          <ul style="display: inline-block; margin-left: 20px; margin-top: 60px;">
+            <li class="fragment">Pas de concaténation.</li>
+            <li class="fragment">Pas de minification.</li>
+            <li class="fragment">Gestion des dépendances faite dans le html.</li>
+          </ul>
+        </small>
+      </div>
 
     </section>
 
