@@ -249,6 +249,71 @@ define(['moduleA', function(moduleA) {
       </p>
     </section>
 
+    <section>
+      <h4>Common JS & Browserify</h4>
+
+      <div class="fragment">
+
+        <img src="img/browserify-logo.png" class="logo" style="height: 175px;">
+        <pre><code class="js" style="max-height: 100%;" data-trim>
+// dans scripts/main.js
+// requière moduleA comme dépendance
+var moduleA = require('scripts/moduleA.js');
+function () {
+  moduleA.valideForm(form);
+  //
+}
+
+// dans scripts/moduleA.js
+module.exports = function (form) { }
+        </code></pre>
+      </div>
+
+      <div class="fragment">
+        <pre><code class="dos" data-trim>
+$ browserify main.js > bundle.js
+        </code></pre>
+      </div>
+      <div class="fragment">
+        <pre><code class="html" data-trim>
+&lt;script src="bundle.js"&gt;&lt;/script&gt;
+        </code></pre>
+      </div>
+
+    </section>
+
+    <section>
+      <p class="fragment" style="width: 100%">
+        Avantages :
+        <ul style="width: 100%">
+          <li class="fragment">gestion des dépendances dans le code</li>
+          <li class="fragment">syntaxe très simple</li>
+          <li class="fragment">bundle et minifie tous les fichiers en un (ou plus) avec un simple script</li>
+        </ul>
+      </p>
+      <p class="fragment" style="width: 100%;">
+        Inconvénients :
+        <ul style="width: 100%">
+          <li class="fragment">pas de lazy loading</li>
+        </ul>
+      </p>
+    </section>
+
+    <section>
+      <h4>Builder Brunch</h4>
+
+      <div class="fragment">
+
+        <img src="img/brunch-logo.png" class="logo" style="height: 165px;">
+        <p>
+          Entre le task runner et le packager, brunch est l’oublié des outils de build, pourtant très performant.<br>
+          <a href="http://brunch.io/" class="fragment related">Brunch, build incrémental, rapide, facile</a>
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h4>Webpack to the rescue</h4>
 
       <div class="fragment">
 
