@@ -37,19 +37,34 @@ $heading2Size: 1.6em;
 $heading3Size: 1.3em;
 $heading4Size: 1.0em;
 
-.reveal .slides {
-	margin-top: 0;
-}
-
 section.has-light-background {
 	&, h1, h2, h3, h4, h5, h6 {
 		color: #222;
 	}
 }
 
+
+// Overwriten styles
+.reveal .slides {
+	margin-top: 0;
+}
+
+
+// Custom classes
+a.related {
+	text-decoration: underline !important;
+	font-size: .7em !important;
+}
 .medium {
 	font-size: .8em !important;
 }
+.reveal .slides > section img.logo {
+	height: 200px;
+	border: 0;
+	background: none;
+	box-shadow: none;
+}
+
 
 // Theme template ------------------------------
 @import "../template/theme";
