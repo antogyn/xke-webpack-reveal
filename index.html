@@ -194,22 +194,61 @@ gulp.task('bundle:js', function() {
     </section>
 
     <section>
-      <h4>La solution : gérer les dépendances dans le code</h4>
+      <h2>La solution : gérer les dépendances dans le code</h2><br>
+
+      <h4 class="fragment">Mais c’est ce qu’on fait en back depuis toujours, non ?</h4><br>
+      <h4 class="fragment">Et oui !</h4>
+    </section>
+
+    <section>
+      <h4>AMD (Asynchronous Module Definition)  <br>& Require JS</h4>
 
       <div class="fragment">
 
-        <img src="img/webpackdependencies.png" style="height: 410px; background-color:lightgray">
+        <img src="img/require-js-logo.png" class="logo" style="height: 165px;">
+        <pre><code class="js" style="max-height: 100%;" data-trim>
+// dans scripts/main.js
+requirejs(['app'], function(app) {
+  //
+}
 
-        <blockquote style="width: 100%">
-          &ldquo;Webpack takes modules with dependencies and generates static assets representing those modules.&rdquo;
-        </blockquote>
+// dans scripts/app.js
+// requière moduleA comme dépendance
+define(['moduleA', function(moduleA) {
+    return function () {
+      //
+    };
+  }
+);
+      </code></pre>
+      </div>
 
+      <div class="fragment">
+        <pre><code class="html" data-trim>
+&lt;script data-main="scripts/main" src="lib/require.js"&gt;&lt;/script&gt;
+        </code></pre>
       </div>
 
     </section>
 
     <section>
-      <h4>La solution : gérer les dépendances dans le code</h4>
+      <p class="fragment" style="width: 100%">
+        Avantages :
+        <ul style="width: 100%">
+          <li class="fragment">gestion des dépendances dans le code</li>
+          <li class="fragment">modules asynchrones</li>
+          <li class="fragment">lazy loading</li>
+        </ul>
+      </p>
+      <p class="fragment" style="width: 100%;">
+        Inconvénients :
+        <ul style="width: 100%">
+          <li class="fragment">un fichier par module</li>
+          <li class="fragment">syntaxe un peu lourde (ça resemble à un système d’injection connue non ?)</li>
+        </ul>
+      </p>
+    </section>
+
 
       <div class="fragment">
 
