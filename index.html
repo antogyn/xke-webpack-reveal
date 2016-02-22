@@ -71,23 +71,26 @@ function validateForm() {
           </li>
 
           <li class="fragment medium">
-            Puis on utilise des Immediately-Invoked Function Expression (IIFE)
+            Puis on utilise des Immediately-Invoked Function Expression (IIFE) et le fameux "module pattern"
             <pre><code class="js" data-trim>
-(function validateForm() {
-  //
+(function () {
+  var app = {};
+  app.validateForm = { };
+  return app;
 })()
             </code></pre>
           </li>
           <li class="fragment medium">
-            Cela permet l’enregistrement des modules dans un name space
+            On peut en suite enregistrer des modules dans un name space
             <pre><code class="js" data-trim>
 var APP = APP || {};
-(function validateForm(APP) {
-  APP.validateForm() { // };
+(function (APP) {
+  APP.validateForm() { };
 })(APP)
             </code></pre>
           </li>
         </ul>
+        <a href="http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html" class="fragment related">Javascript module pattern en détail</a>
       </div>
 
     </section>
