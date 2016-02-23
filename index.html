@@ -497,6 +497,161 @@ import membreDéfaut from "nom-module";
     </section>
 
     <section>
+      <h4>Un exemple simple</h4>
+
+
+      <img src="img/schema1.png">
+
+      <ul>
+        <li class="fragment">
+          Un fichier html racine, notre template de base
+        </li>
+        <li class="fragment">
+          Un fichier JS racine, celui de mon application
+        </li>
+        <li class="fragment">
+          Un fichier JS, d'un composant
+        </li>
+        <li class="fragment">
+          Un fichier css, le style du composant
+        </li>
+        <li class="fragment">
+          Un fichier html, le template du composant
+        </li>
+      </ul>
+
+    </section>
+
+    <section>
+      <pre><code class="html" data-trim>
+<!-- index.html -->
+&lt;my-foo&gt;&lt;/my-foo&gt;
+&lt;script charset="utf-8" src="dist/app.js"&gt;&lt;/script&gt;
+      </code></pre>
+      <pre class="fragment"><code class="js" data-trim>
+// app.js
+import './components/my-foo/my-foo';
+      </code></pre>
+      <pre class="fragment"><code class="html" data-trim>
+<!-- my-foo.html -->
+<p>Hello, je suis my-foo !</p>
+        </code></pre>
+      <pre class="fragment"><code class="css" data-trim>
+/* my-foo.css */      
+my-foo {
+  background-color: blue; /* et je suis bleu ! */
+  font-size: 3em;
+} 
+        </code></pre>
+      <pre class="fragment"><code class="js" data-trim>
+// my-foo.js
+import template from './my-foo.html';
+import './my-foo.css';
+
+// création du custom element my-foo
+const MyFooProto = Object.create(HTMLElement.prototype);
+MyFooProto.createdCallback = function() {
+  this.innerHTML = template; // utilisation du template importé
+};
+document.registerElement('my-foo', {prototype: MyFooProto});
+      </code></pre>
+    </section>
+
+    <section>
+      <h4>Le résultat ?</h4>
+      <img class="fragment" src="img/result1.png" style="height: 600px">
+    </section>
+
+
+    <section>
+      <h4>webpack.config.js</h4>
+
+      <small>
+        <pre class="fragment" style="width:100%"><code class="js" data-trim>
+module.exports = {
+  context: __dirname, // la racine de l'app (fs)
+        </code></pre>
+
+        <pre class="fragment" style="width:100%"><code class="js" data-trim>
+&nbsp;&nbsp;entry: {
+    app: [ './public/app.js' ] // les points d'entrée de l'app
+  },
+        </code></pre>
+
+        <pre class="fragment" style="width:100%"><code class="js" data-trim>
+&nbsp;&nbsp;output: {
+    path: __dirname + '/dist', // le path absolu de l'output (fs)
+    filename: 'app.js', // le nom de l'output
+    publicPath: '/dist/' // le path de l'output relatif au host
+  },
+        </code></pre>
+
+        <pre class="fragment" style="width:100%"><code class="js" data-trim>
+&nbsp;&nbsp;module: {
+    loaders: [
+      {
+        test: /\.html$/, // si je rencontre un import de fichier html...
+        loader: 'html' //... alors j'utilise le loader html
+      },
+        </code></pre>
+
+        <pre class="fragment" style="width:100%"><code class="js" data-trim>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+        test: /\.css/, // si je rencontre un import de fichier css...
+        loader: 'style!css' //... alors j'utilise les loaders style et css
+      },
+        </code></pre>
+
+
+        <pre class="fragment" style="width:100%"><code class="js" data-trim>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+        test: /\.js$/, // si je rencontre un import de fichier js...
+        exclude: [/node_modules/],//... qui n'est pas dans node_module/...
+        loader: 'babel' //... alors j'utilise le loader babel
+      }
+        </code></pre>
+
+        <pre class="fragment" style="width:100%"><code class="js" data-trim>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// pour tout le reste, webpack utilise le js loader (built-in)
+    ]
+  }
+};
+        </code></pre>
+
+
+      </small>
+
+
+    </section>
+
+
+
+
+    <section>
+      <h2>Lancer Webpack</h2>
+
+
+      <pre class="fragment"><code class="bash" data-trim>
+webpack
+        </code></pre>
+
+      <pre class="fragment"><code class="bash" data-trim>
+# Dev : sourcemaps
+webpack -d [--watch]
+        </code></pre>
+
+      <pre class="fragment"><code class="bash" data-trim>
+# Prod : minification, optimisations
+webpack -p
+        </code></pre>
+
+    </section>
+
+
+
+
+    <section>
       <h2>Slides</h2>
 
       <p>
