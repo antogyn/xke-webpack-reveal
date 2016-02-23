@@ -648,34 +648,48 @@ webpack -p
 
     </section>
 
-
-
-
     <section>
-      <h2>Slides</h2>
-
-      <p>
-        Not a coder? Not a problem. There's a fully-featured visual editor for authoring these, try it out at <a
-            href="http://slides.com" target="_blank">http://slides.com</a>.
-      </p>
-
-      <small>
-        <span class="fragment">Mais c’est ce qu’on fait en back depuis toujours, non ?</span><br>
-        <span class="fragment">Et oui !</span>
-      </small>
+      <h2>Allons plus loin...</h2>
     </section>
 
     <section>
-      <h2>Point of View</h2>
+      <h4>Déplacer les styles dans un fichier à part</h4>
 
-      <p>
-        Press <strong>ESC</strong> to enter the slide overview.
-      </p>
+      <div class="fragment">
 
-      <p>
-        Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>.
-        Alt + click anywhere to zoom back out.
-      </p>
+      Dans notre config webpack :
+      <pre><code class="js" data-trim>
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+        </code></pre>
+
+      </div>
+
+      <pre class="fragment"><code class="js" data-trim>
+plugins: [
+  new ExtractTextPlugin('app.css')
+],
+        </code></pre>
+
+      <pre class="fragment"><code class="js" data-trim>
+{
+  test: /\.css/,
+  loader: ExtractTextPlugin.extract('style', 'css')
+},
+        </code></pre>
+
+      <div class="fragment">
+      Dans notre html :
+
+      <pre><code class="html" data-trim>
+<!-- index.html -->
+<link rel=stylesheet type="text/css" href="dist/app.css">
+       </code></pre>
+
+      </div>
+
+
+
+
     </section>
 
     <section>
