@@ -221,14 +221,13 @@ module.exports = {
 
       <small>
         <ul>
-          <li class="fragment">Mis dans &lt;head&gt;, l’utilisateur doit attendre le chargement de tous les scripts.</li>
-          <li class="fragment">Un peu mieux, en fin de &lt;body&gt;, les scripts se chargent en même temps que le dom s’exécute.</li>
+          <li class="fragment">De manière synchrone, dans &lt;head&gt;, l’utilisateur doit attendre le chargement de tous les scripts.</li>
+          <li class="fragment">Ou en asynchrone, en fin de &lt;body&gt;, les scripts se chargent en même temps que le dom s’exécute.</li>
         </ul>
       </small>
       <div style="text-align: left">
         <small>
           <span class="fragment" style="display: inline-block; margin-left: 40px; margin-top: 20px;">
-            <strong>Don’t do this!</strong><br>
             <img src="img/nogodpleaseno.gif" style="height: 200px;">
           </span>
           <ul style="display: inline-block; margin-left: 20px; margin-top: 60px;">
@@ -257,7 +256,7 @@ gulp.task('bundle:js', function() {
         </code></pre>
 
       <p class="fragment">
-        Super, mon code est concaténé, minifié, zippé
+        Super, le code est concaténé, minifié, zippé
       </p>
 
       <p class="fragment">
@@ -308,7 +307,7 @@ gulp.task('bundle:js', function() {
     </section>
 
     <section>
-      <h4>AMD (Asynchronous Module Definition)  <br>& Require JS</h4>
+      <h4>AMD & Require JS</h4>
 
       <div class="fragment">
 
@@ -339,6 +338,7 @@ define(['moduleA', function(moduleA) {
     </section>
 
     <section>
+      <h4>+ ou -</h4>
       <p class="fragment" style="width: 100%">
         Avantages :
         <ul style="width: 100%">
@@ -367,12 +367,12 @@ define(['moduleA', function(moduleA) {
 // requière moduleA comme dépendance
 var moduleA = require('scripts/moduleA.js');
 function () {
-  moduleA.valideForm(form);
+  moduleA.valideForm();
   //
 }
 
 // dans scripts/moduleA.js
-module.exports = function (form) { }
+module.exports = function () { }
         </code></pre>
       </div>
 
@@ -390,6 +390,7 @@ $ browserify main.js > bundle.js
     </section>
 
     <section>
+      <h4>+ ou -</h4>
       <p class="fragment" style="width: 100%">
         Avantages :
         <ul style="width: 100%">
@@ -401,6 +402,7 @@ $ browserify main.js > bundle.js
       <p class="fragment" style="width: 100%;">
         Inconvénients :
         <ul style="width: 100%">
+          <li class="fragment">ajoute une phase de build</li>
           <li class="fragment">pas de lazy loading</li>
         </ul>
       </p>
