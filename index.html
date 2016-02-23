@@ -422,6 +422,66 @@ $ browserify main.js > bundle.js
     </section>
 
     <section>
+      <h3>The Howly Grail?</h3>
+      <div class="fragment">
+        <img src="img/grail.gif">
+      </div>
+    </section>
+
+    <section>
+      <h4>Module ES 2015 - export</h4>
+      <div style="text-align: left;">
+        <div class="fragment">
+          <ul>
+            <li><span class="medium">Un standard aux nombreuses possibilités !</span></li>
+            <li><span class="medium">Utilisable dès maintenant en utilisant <a href="https://babeljs.io/">Babel</a></span></li>
+          </ul>
+        </div>
+        <pre class="fragment"><code class="js" data-trim>
+export { nom1, nom2, …, nomN };
+export { variable1 as nom1, variable2 as nom2, …, nomN };
+export let nom1, nom2, …, nomN; // fonctionne également avec var
+export let nom1 = …, nom2 = …, …, nomN; // également avec var, const
+
+export default expression;
+export default function (…) { … } // également avec class, function*
+export default function nom1(…) { … } // également avec class, function*
+export { nom1 as default, … };
+
+export * from …;
+export { nom1, nom2, …, nomN } from …;
+export { import1 as nom1, import2 as nom2, …, nomN } from …;
+        </code></pre>
+        <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/export" class="fragment related">Référence sur les exports ES 2015</a>
+      </div>
+    </section>
+
+    <section>
+      <h4>Module ES 2015 - import</h4>
+      <div style="text-align: left;">
+        <pre class="fragment"><code class="js" data-trim>
+import nom from "nom-module";
+import * as nom from "nom-module";
+import { membre } from "nom-module";
+import {membre as alias } from "nom-module";
+import { membre1 , membre2 } from "nom-module";
+import { membre1 , membre2 as alias2 , [...] } from "nom-module";
+import membreDéfaut , { member [ , [...] ] } from "nom-module";
+import membreDéfaut, * as alias from "nom-module";
+import membreDéfaut from "nom-module";
+        </code></pre>
+        <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/export" class="fragment related">Référence sur les imports ES 2015</a>
+      </div>
+    </section>
+
+    <section>
+      <h3>Et pour la gestion des dépendances ?</h3>
+      <div class="fragment">
+        <img src="img/tada.gif">
+      </div>
+    </section>
+
+    <section>
       <h4>Webpack to the rescue</h4>
 
       <div class="fragment">
