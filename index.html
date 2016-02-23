@@ -693,85 +693,156 @@ plugins: [
     </section>
 
     <section>
-      <h2>Touch Optimized</h2>
+      <h4>Linter le code</h4>
 
-      <p>
-        Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
-      </p>
+      <pre><code class="js" data-trim>
+module: {
+  preLoaders: [
+    {
+      test: /\.js$/,
+      exclude: /node_modules/,
+      loader: "eslint"
+    }
+  ],
+        </code></pre>
+
+      <div class="fragment">
+
+      <h4>Zipper le bundle</h4>
+
+      <pre><code class="js" data-trim>
+var CompressionPlugin = require('compression-webpack-plugin');
+        </code></pre>
+
+       <pre><code class="js" data-trim>
+plugins: [
+  new CompressionPlugin()
+]
+         </code></pre>
+
+      </div>
+
     </section>
 
-    <section data-markdown>
-      <script type="text/template">
+
+
+
+
+
+
+
+
+
+
+
+
+  <section>
+    <h2>Slides</h2>
+
+    <p>
+      Not a coder? Not a problem. There's a fully-featured visual editor for authoring these, try it out at <a
+          href="http://slides.com" target="_blank">http://slides.com</a>.
+    </p>
+
+    <small>
+      <span class="fragment">Mais c’est ce qu’on fait en back depuis toujours, non ?</span><br>
+      <span class="fragment">Et oui !</span>
+    </small>
+  </section>
+
+  <section>
+    <h2>Point of View</h2>
+
+    <p>
+      Press <strong>ESC</strong> to enter the slide overview.
+    </p>
+
+    <p>
+      Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>.
+      Alt + click anywhere to zoom back out.
+    </p>
+  </section>
+
+  <section>
+    <h2>Touch Optimized</h2>
+
+    <p>
+      Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
+    </p>
+  </section>
+
+  <section data-markdown>
+    <script type="text/template">
+      ## Markdown support
+
+      Write content using inline or external Markdown.
+      Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
+
+      ```
+      <section data-markdown>
         ## Markdown support
 
         Write content using inline or external Markdown.
         Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
+      </section>
+      ```
+    </script>
+  </section>
 
-        ```
-        <section data-markdown>
-          ## Markdown support
+  <section>
+    <section id="fragments">
+      <h2>Fragments</h2>
 
-          Write content using inline or external Markdown.
-          Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-        </section>
-        ```
-      </script>
+      <p>Hit the next arrow...</p>
+
+      <p class="fragment">... to step through ...</p>
+
+      <p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span
+            class="fragment">slide.</span></p>
+
+      <aside class="notes">
+        This slide has fragments which are also stepped through in the notes window.
+      </aside>
     </section>
-
     <section>
-      <section id="fragments">
-        <h2>Fragments</h2>
+      <h2>Fragment Styles</h2>
 
-        <p>Hit the next arrow...</p>
+      <p>There's different types of fragments, like:</p>
 
-        <p class="fragment">... to step through ...</p>
+      <p class="fragment grow">grow</p>
 
-        <p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span
-              class="fragment">slide.</span></p>
+      <p class="fragment shrink">shrink</p>
 
-        <aside class="notes">
-          This slide has fragments which are also stepped through in the notes window.
-        </aside>
-      </section>
-      <section>
-        <h2>Fragment Styles</h2>
+      <p class="fragment fade-out">fade-out</p>
 
-        <p>There's different types of fragments, like:</p>
+      <p class="fragment current-visible">current-visible</p>
 
-        <p class="fragment grow">grow</p>
+      <p class="fragment highlight-red">highlight-red</p>
 
-        <p class="fragment shrink">shrink</p>
-
-        <p class="fragment fade-out">fade-out</p>
-
-        <p class="fragment current-visible">current-visible</p>
-
-        <p class="fragment highlight-red">highlight-red</p>
-
-        <p class="fragment highlight-blue">highlight-blue</p>
-      </section>
+      <p class="fragment highlight-blue">highlight-blue</p>
     </section>
+  </section>
 
-    <section id="transitions">
-      <h2>Transition Styles</h2>
+  <section id="transitions">
+    <h2>Transition Styles</h2>
 
-      <p>
-        You can select from different transitions, like: <br>
-        <a href="?transition=none#/transitions">None</a> -
-        <a href="?transition=fade#/transitions">Fade</a> -
-        <a href="?transition=slide#/transitions">Slide</a> -
-        <a href="?transition=convex#/transitions">Convex</a> -
-        <a href="?transition=concave#/transitions">Concave</a> -
-        <a href="?transition=zoom#/transitions">Zoom</a>
-      </p>
-    </section>
+    <p>
+      You can select from different transitions, like: <br>
+      <a href="?transition=none#/transitions">None</a> -
+      <a href="?transition=fade#/transitions">Fade</a> -
+      <a href="?transition=slide#/transitions">Slide</a> -
+      <a href="?transition=convex#/transitions">Convex</a> -
+      <a href="?transition=concave#/transitions">Concave</a> -
+      <a href="?transition=zoom#/transitions">Zoom</a>
+    </p>
+  </section>
 
-    <section id="themes">
-      <h2>Themes</h2>
+  <section id="themes">
+    <h2>Themes</h2>
 
-      <p>
-        reveal.js comes with a few themes built in: <br>
-        <!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
+    <p>
+      reveal.js comes with a few themes built in: <br>
+      <!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
         <a href="#"
            onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black
           (default)</a> -
