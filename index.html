@@ -724,6 +724,79 @@ plugins: [
 
     </section>
 
+    <section>
+
+      <h4>Et mes images dans mon html/css ? Mes fonts ?</h4>
+
+      <div class="fragment">
+        Les loaders html et style sont capables de reconnaître leurs dépendances
+      </div>
+
+      <pre class="fragment"><code class="html" data-trim>
+<!-- url relative dans mes sources -->
+<img src="my-foo.png" />
+        </code></pre>
+
+      <pre class="fragment"><code class="css" data-trim>
+@font-face {
+  font-family: myFont;
+  src: url(my-font.woff); /* idem */
+}
+        </code></pre>
+
+      <div class="fragment">
+        Et on les charge grâce au file loader
+      </div>
+
+      <pre class="fragment"><code class="js" data-trim>
+
+loaders: [
+  {
+    test: /\.png$/,
+    loader: "file?name=img/[name].[ext]"
+  },
+  {
+    test: /\.woff$/,
+    loader: 'file?name=fonts/[name].[ext]'
+  },
+        </code></pre>
+
+    </section>
+
+
+    <section>
+
+      <h2>Vous vous souvenez de lui ?</h2>
+
+      <pre><code class="html" data-trim>
+output: {
+  path: __dirname + '/dist',
+  filename: 'app.js',
+  publicPath: '/dist/' // <===== ici
+}
+        </code></pre>
+
+      <div class="fragment">
+        Webpack préfixe les urls par le public path !
+      </div>
+
+      <div class="fragment">
+
+            <pre><code class="html" data-trim>
+<img src="my-foo.png">
+              </code></pre>
+
+      devient
+
+      <pre><code class="html" data-trim>
+<img src="/dist/img/my-foo.png">
+        </code></pre>
+
+        </div>
+
+      <img class="fragment" src="img/itsbeautiful.gif" style="height:150px">
+
+    </section>
 
 
 
@@ -736,7 +809,10 @@ plugins: [
 
 
 
-  <section>
+
+
+
+    <section>
     <h2>Slides</h2>
 
     <p>
