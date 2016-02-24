@@ -366,6 +366,70 @@ output: {
 
     </section>
 
+    <section>
+      <h4>Ajouter un hash au nom de mon bundle</h4>
+
+      <small>
+      <div class="fragment">
+
+        Dans notre config webpack :
+      <pre><code class="js" data-trim>
+var BundleTracker = require('webpack-bundle-tracker');
+      </code></pre>
+
+      </div>
+
+      <pre class="fragment"><code class="js" data-trim>
+plugins: [
+  new BundleTracker({
+    path: __dirname,
+    filename: 'webpack-manifest.json'})
+],
+      </code></pre>
+
+      <div class="fragment">
+        On utilise un librairie de templating (ici mustache)
+
+        <pre><code class="js" data-trim>
+<!-- html.mustache -->
+&lt;my-foo&gt;&lt;/my-foo&gt;
+{{#chunks.app}}
+&lt;script charset="utf-8" src="dist/{{name}}"&gt;&lt;/script&gt;
+{{/chunks.app}}
+        </code></pre>
+      </div>
+
+      <div class="fragment">
+        Grâce à un script
+
+        <pre><code class="js" data-trim>
+webpack -d && mustache webpack-manifest.json index.mustache > index.html
+        </code></pre>
+      </div>
+
+      <div class="fragment">
+        Un fichier json est créé, dans lequel on le bundle
+
+        <pre><code class="js" data-trim>
+"name": "app-0a277e942b5125d06389.js",
+        </code></pre>
+      </div>
+
+      <div class="fragment">
+        Notre index compilé récupère le nom hashé
+
+      <pre><code class="html" data-trim>
+&lt;my-foo&gt;&lt;/my-foo&gt;
+&lt;script charset="utf-8" src="dist/app-0a277e942b5125d06389.js"&gt;&lt;/script&gt;
+      </code></pre>
+
+      </div>
+      </small>
+
+    </section>
+
+
+
 
 
 
