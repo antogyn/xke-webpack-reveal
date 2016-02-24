@@ -367,13 +367,20 @@ output: {
     </section>
 
     <section>
-      <h4>Ajouter un hash au nom de mon bundle</h4>
+      <h4>Ajouter un hash au nom du bundle</h4>
 
       <small>
       <div class="fragment">
 
         Dans notre config webpack :
-      <pre><code class="js" data-trim>
+
+    <pre><code class="js" data-trim>
+output: {
+  ...
+  filename: 'app-[hash].js',
+      </code></pre>
+
+      <pre class="fragment"><code class="js" data-trim>
 var BundleTracker = require('webpack-bundle-tracker');
       </code></pre>
 
@@ -387,11 +394,21 @@ plugins: [
 ],
       </code></pre>
 
+
       <div class="fragment">
+        Un fichier json est créé, dans lequel on retrouve le bundle
+
+      <pre><code class="js" data-trim>
+"name": "app-0a277e942b25.js",
+        </code></pre>
+      </div>
+
+
+        <div class="fragment">
         On utilise un librairie de templating (ici mustache)
 
-        <pre><code class="js" data-trim>
-<!-- html.mustache -->
+        <pre><code class="html" data-trim>
+<!-- index.mustache -->
 &lt;my-foo&gt;&lt;/my-foo&gt;
 {{#chunks.app}}
 &lt;script charset="utf-8" src="dist/{{name}}"&gt;&lt;/script&gt;
@@ -400,27 +417,16 @@ plugins: [
       </div>
 
       <div class="fragment">
-        Grâce à un script
-
-        <pre><code class="js" data-trim>
-webpack -d && mustache webpack-manifest.json index.mustache > index.html
-        </code></pre>
-      </div>
-
-      <div class="fragment">
-        Un fichier json est créé, dans lequel on retrouve le bundle
-
-        <pre><code class="js" data-trim>
-"name": "app-0a277e942b5125d06389.js",
-        </code></pre>
-      </div>
-
-      <div class="fragment">
         Notre index compilé récupère le nom hashé
 
+      <pre><code class="bash" data-trim>
+mustache webpack-manifest.json index.mustache > index.html
+        </code></pre>
+
       <pre><code class="html" data-trim>
+<!-- index.html -->
 &lt;my-foo&gt;&lt;/my-foo&gt;
-&lt;script charset="utf-8" src="dist/app-0a277e942b5125d06389.js"&gt;&lt;/script&gt;
+&lt;script charset="utf-8" src="dist/app-0a277e942b25.js"&gt;&lt;/script&gt;
       </code></pre>
 
       </div>
@@ -430,26 +436,23 @@ webpack -d && mustache webpack-manifest.json index.mustache > index.html
 
 
     <section>
-      <h4>Compiler les fichiers sass</h4>
+      <h4>Compiler des fichiers sass</h4>
 
       <div class="fragment">
-
-        Grâce à node-sass et sass-loader.<br>
         Dans notre config webpack :
-      <pre><code class="js" data-trim>
+      <pre style="width: 100%"><code class="js" data-trim>
 {
   test: /\.scss$/,  // si je rencontre un import de fichier scss...
-  loaders: ["style", "css", "sass"] //... alors j'utilise sass loader puis style loader
+  loaders: ["style", "css", "sass"] //... alors j'utilise les loaders sass,
+                                    // css et style
 }
       </code></pre>
 
       </div>
 
       <div class="fragment">
-        pour ajouter les sources map
-      <pre><code class="js" data-trim>
-devtool: "source-map",
-      </code></pre>
+      <div>
+        Pour ajouter les sources map (en plus de webpack -d)
       </div>
 
       <pre class="fragment"><code class="js" data-trim>
@@ -458,6 +461,8 @@ devtool: "source-map",
   loaders: ["style", "css?sourceMap", "sass?sourceMap"]
 }
       </code></pre>
+
+      </div>
 
     </section>
 
