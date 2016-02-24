@@ -429,6 +429,37 @@ webpack -d && mustache webpack-manifest.json index.mustache > index.html
     </section>
 
 
+    <section>
+      <h4>Compiler les fichiers sass</h4>
+
+      <div class="fragment">
+
+        Grâce à node-sass et sass-loader.<br>
+        Dans notre config webpack :
+      <pre><code class="js" data-trim>
+{
+  test: /\.scss$/,  // si je rencontre un import de fichier scss...
+  loaders: ["style", "css", "sass"] //... alors j'utilise sass loader puis style loader
+}
+      </code></pre>
+
+      </div>
+
+      <div class="fragment">
+        pour ajouter les sources map
+      <pre><code class="js" data-trim>
+devtool: "source-map",
+      </code></pre>
+      </div>
+
+      <pre class="fragment"><code class="js" data-trim>
+{
+  test: /\.scss$/,
+  loaders: ["style", "css?sourceMap", "sass?sourceMap"]
+}
+      </code></pre>
+
+    </section>
 
 
 
