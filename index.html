@@ -7,7 +7,7 @@
   <title>Webpack - le premier vrai packager front</title>
 
   <meta name="description" content="Webpack - le premier vrai packager front">
-  <meta name="author" content="Anthony Ginier & Antoine Le Taxin">
+  <meta name="author" content="Anthony Giniers & Antoine Le Taxin">
 
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -57,9 +57,9 @@
         </p>
       </small>
     </section>
-
+    
     <section>
-      <h4>Webpack to the rescue</h4>
+      <h4>Webpack c'est quoi ?</h4>
 
       <div class="fragment">
 
@@ -70,6 +70,11 @@
         </blockquote>
 
       </div>
+
+      <aside class="notes">
+        N'importe quel type de fichiers <br>
+        Les gère comme des modules et comprend leurs dépendances
+      </aside>
 
     </section>
 
@@ -96,6 +101,11 @@
           Un fichier html, le template du composant
         </li>
       </ul>
+      <br>
+      <br>
+      <div class="fragment">
+        ES6, compilé avec babel
+      </div>
 
     </section>
 
@@ -139,7 +149,6 @@ document.registerElement('my-foo', {prototype: MyFooProto});
       <img class="fragment" src="img/result1.png" style="height: 600px">
     </section>
 
-
     <section>
       <h4>webpack.config.js</h4>
 
@@ -151,7 +160,7 @@ module.exports = {
 
         <pre class="fragment" style="width:100%"><code class="js" data-trim>
 &nbsp;&nbsp;entry: {
-    app: [ './public/app.js' ] // les points d'entrée de l'app
+    app: './public/app.js' // le point d'entrée de l'app
   },
         </code></pre>
 
@@ -159,7 +168,7 @@ module.exports = {
 &nbsp;&nbsp;output: {
     path: __dirname + '/dist', // le path absolu de l'output (fs)
     filename: 'app.js', // le nom de l'output
-    publicPath: '/dist/' // le path de l'output relatif au host
+    publicPath: '/dist/' // l'url de l'output relatif au host
   },
         </code></pre>
 
@@ -183,7 +192,7 @@ module.exports = {
         <pre class="fragment" style="width:100%"><code class="js" data-trim>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
         test: /\.js$/, // si je rencontre un import de fichier js...
-        exclude: [/node_modules/],//... qui n'est pas dans node_module/...
+        exclude: /node_modules/,//... qui n'est pas dans node_module/...
         loader: 'babel' //... alors j'utilise le loader babel
       }
         </code></pre>
@@ -322,6 +331,12 @@ plugins: [
         Et on les charge grâce au file loader
       </div>
 
+      <aside class="notes">
+        file loader fait 2 choses : <br>
+        Copie des fichiers dans dist/ <br>
+        Changer les src/url dans img/font
+      </aside>
+
       <pre class="fragment"><code class="js" data-trim>
 
 loaders: [
@@ -369,6 +384,11 @@ output: {
         </div>
 
       <img class="fragment" src="img/itsbeautiful.gif" style="height:150px">
+
+      <aside class="notes">
+        Webpack a besoin de savoir à quelle url sont servis les assets
+      </aside>
+
 
     </section>
 
@@ -457,17 +477,129 @@ mustache webpack-manifest.json index.mustache > index.html
       </div>
 
       <div class="fragment">
-      <div>
-        Pour ajouter les sources map (en plus de webpack -d)
-      </div>
 
-      <pre class="fragment"><code class="js" data-trim>
+        <div class="fragment">
+          Pour ajouter les sources map (en plus de webpack -d)
+
+        <pre style="width: 100%"><code class="js" data-trim>
 {
   test: /\.scss$/,
   loaders: ["style", "css?sourceMap", "sass?sourceMap"]
 }
+        </code></pre>
+
+        </div>
+      </div>
+
+    </section>
+
+    <section>
+      <h4>Séparer les vendors (libs) de mon app</h4>
+
+      <div class="fragment">
+        <pre style="width: 100%"><code class="js" data-trim>
+var webpack = require('webpack');
+          </code></pre>
+
+        <pre style="width: 100%"><code class="js" data-trim>
+&nbsp;&nbsp;entry: {
+    app: './public/app.js',
+    vendors: ['jquery'] // <= va faire un require('jquery');
+  },
+          </code></pre>
+
+        <pre style="width: 100%"><code class="js" data-trim>
+&nbsp;&nbsp;plugins: [
+    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js')
+  ],
+          </code></pre>
+
+      </div>
+
+    <pre class="fragment" style="width: 100%"><code class="js" data-trim>
+// app.js
+import $ from 'jquery';
+$('body').css('background-color', 'yellow');
       </code></pre>
 
+          <pre class="fragment" style="width: 100%"><code class="html" data-trim>
+<!-- index.html -->
+<script charset="utf-8" src='dist/vendors.js'></script>
+<script charset="utf-8" src="dist/app.js"></script>
+            </code></pre>
+
+      <div class="fragment">
+        Le code de jQuery n'est présent que dans vendors.js !
+      </div>
+
+
+    </section>
+
+
+    <section>
+      <h4>Méthode 2 : créer son propre module important tous les vendors</h4>
+
+      <pre class="fragment" style="width: 100%"><code class="js" data-trim>
+// vendors.js
+import 'jquery';
+        </code></pre>
+
+        <pre class="fragment" style="width: 100%"><code class="js" data-trim>
+entry: {
+  app: './public/app.js',
+  vendors: './public/vendors.js' // <=
+},
+          </code></pre>
+
+    </section>
+
+    <section>
+      <h4>Lazy loading</h4>
+
+      <div class="fragment">
+        Tout notre bundle est chargé, même les modules qui ne sont pas immédiatement utiles
+      </div>
+
+      <br/>
+
+      <div class="fragment">
+        Pour avoir un chargement initial plus rapide, j'aimerais découper mon bundle et charger les modules à la volée
+      </div>
+
+      </section>
+    <section>
+
+      <pre style="width: 100%"><code class="html" data-trim>
+<!-- index.html -->
+<button id="mybutton">Make everything yellow !</button>
+<script charset="utf-8" src="dist/app.js"></script>
+        </code></pre>
+
+      <pre class="fragment" style="width: 100%"><code class="js" data-trim>
+// mybutton.js
+import $ from 'jquery';
+
+export default {
+  makeItYellow() {
+    $('body').css('background-color', 'yellow');
+  }
+};
+        </code></pre>
+
+        <pre class="fragment" style="width: 100%"><code class="js" data-trim>
+// app.js
+import $ from 'jquery'
+
+$('#mybutton').click(() => {
+  require.ensure([], () => {
+    const mybutton = require('./mybutton').default;
+    mybutton.makeItYellow();
+  });
+});
+          </code></pre>
+
+      <div class="fragment">
+        (démo)
       </div>
 
     </section>
@@ -476,23 +608,58 @@ mustache webpack-manifest.json index.mustache > index.html
       <h4>Mettre en place un server de dev qui met à jour le browser à chaque changement</h4>
 
       <div class="fragment">
-        Après avoir installé webpack-dev-server, on place un script pour le lancer, dans notre package.json
+        Après avoir installé webpack-dev-server :
       <pre style="width: 100%"><code class="js" data-trim>
-"watch": "webpack-dev-server --inline --hot --content dist/"
+webpack-dev-server --inline --hot --content dist/
       </code></pre>
       </div>
 
       <div class="fragment">
-        Il suffit d’éxecuter la commande, le server démarre, les assets sont compilés et placés en mémoire.
-        <pre class="fragment"><code class="js" data-trim>
-npm run watch
-        </code></pre>
+        Le server démarre, les assets sont compilés et placés en mémoire.
       </div>
+
+      <br>
 
       <div class="fragment">
-        Comme tous les fichiers sont en mémoire, tout changement sera détecté, et les modifications prisent en compte. Soit en hot reload, soit en livereload.
+        Les modifications se feront à chaud (hot module replacement) si possible, sinon en livereload.
       </div>
 
+      <br>
+
+      <div class="fragment">
+        (démo)
+      </div>
+
+      <br>
+
+      <div class="fragment">
+        (react-hot-loader)
+      </div>
+
+    </section>
+
+    <section>
+      <h2>En fait, Webpack...</h2>
+    </section>
+
+    <section>
+      <h2>...convient à tous les projets !</h2>
+
+      <aside class="notes">
+        Quelle que soit la taille <br>
+        Petit = clareté du code <br>
+        Grand = partage de composants/modules <br>
+        Evolution de la config de manière incrémentale <br>
+        Evite d'avoir X tâches gulp/grunt <br>
+      </aside>
+
+    </section>
+
+    <section data-audio-src="mp3/win31.mp3">
+      <small>tada</small>
+
+      <br><br>
+      <h2 class="fragment">Questions ?</h2>
     </section>
 
 
@@ -515,11 +682,28 @@ npm run watch
 
     transition: 'slide', // none/fade/slide/convex/concave/zoom
 
+    audio: {
+      prefix: 'audio/',   // audio files are stored in the "audio" folder
+      suffix: '.ogg',     // audio files have the ".ogg" ending
+      textToSpeechURL: null,  // the URL to the text to speech converter
+      defaultText: false,     // use slide text as default for the text to speech converter
+      advance: -1,         // advance to next slide after given time in milliseconds after audio has played, use negative value to not advance
+      autoplay: true,    // automatically start slideshow
+      defaultDuration: 0, // default duration in seconds if no audio is available
+      playerOpacity: -1,    // opacity value of audio player if unfocused
+      startAtFragment: false // when moving to a slide, start at the current fragment or at the start of the slide
+    },
+
     // Optional reveal.js plugins
     dependencies: [
       {
         src: 'lib/js/classList.js', condition: function () {
         return !document.body.classList;
+      }
+      },
+      {
+        src: 'plugin/audio-slideshow/audio-slideshow.js', condition: function () {
+        return !!document.body.classList;
       }
       },
       {
